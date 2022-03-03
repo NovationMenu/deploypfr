@@ -44,7 +44,6 @@ jobs:
       with:
         namespace: "kubetest"
         manifests: |
-          ${{ github.workspace }}/manifests/deploy.yaml
           ${{ github.workspace }}/manifests/namespace.yaml
           ${{ github.workspace }}/manifests/deployment-menu.yaml
           ${{ github.workspace }}/manifests/service-menu.yaml
