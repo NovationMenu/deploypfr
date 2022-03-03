@@ -26,6 +26,7 @@ jobs:
           ${{ github.workspace }}/manifests/deploy.yaml
   deploy:
     runs-on: ubuntu-latest
+    needs: installcontrolleringress
     steps:
     - uses: actions/checkout@main
     - uses: azure/docker-login@v1
