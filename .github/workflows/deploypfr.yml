@@ -22,7 +22,7 @@ jobs:
       with:
         namespace: "kubetest"
         manifests: |
-          https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
+          deploy.yaml
           ${{ github.workspace }}/manifests/namespace.yaml
           ${{ github.workspace }}/manifests/deployment-menu.yaml
           ${{ github.workspace }}/manifests/service-menu.yaml
