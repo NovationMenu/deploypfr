@@ -20,6 +20,7 @@ jobs:
         resource-group: M2I
     - uses: azure/k8s-deploy@v1
       with:
+        namespace: "kubetest"
         manifests: |
           ${{ github.workspace }}/manifests/namespace.yaml
           ${{ github.workspace }}/manifests/deployment-menu.yaml
