@@ -3,6 +3,27 @@ name: deploypfr
 on: workflow_dispatch
 
 jobs:
+  installcontrolleringress:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - name: "Configuration et connection a AKS"
+      uses: azure/aks-set-context@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        cluster-name: pfr
+        resource-group: M2I
+    - uses: azure/k8s-deploy@v1
+      with:
+        namespace: "ingress-nginx"
+        manifests: |
+          ${{ github.workspace }}/manifests/namespace-ingress.yaml
+          ${{ github.workspace }}/manifests/deploy.yaml
   deploy:
     runs-on: ubuntu-latest
     steps:
