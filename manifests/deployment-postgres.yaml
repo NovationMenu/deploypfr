@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: kubetest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:10.1
+          # command: ["/bin/sh"]
+          # args: ["-c", "psql -h localhost -U root -p 5432 postgresdb", "create database testdb"]
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
+      nodeSelector:
+        type: master
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: pg-pvc
