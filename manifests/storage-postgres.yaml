@@ -1,0 +1,29 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgresql-pvc
+  namespace: kubetest
+  labels:
+    app: postgresql
+spec:
+  storageClassName: postgresql-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: postgresql-sc
+mountOptions:
+- dir_mode=0777
+- file_mode=0777
+- uid=999
+- gid=999
+parameters:
+  skuName: Standard_LRS
+provisioner: kubernetes.io/azure-file
+reclaimPolicy: Retain

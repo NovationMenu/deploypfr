@@ -26,10 +26,13 @@ spec:
                 name: postgres-config
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
+              subPath: pgdata
               name: postgredb
-      nodeSelector:
-        type: master
+          env:
+            # need to define PGDATA env var because not using the default /var/lib/postgresql/data, but a subpath under it.
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
       volumes:
         - name: postgredb
           persistentVolumeClaim:
-            claimName: pg-pvc
+            claimName: postgresql-pvc
