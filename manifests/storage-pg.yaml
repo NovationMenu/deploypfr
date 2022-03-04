@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pg-pvc
+  namespace: kubetest
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: datapfr
+  resources:
+    requests:
+      storage: 10Gi
