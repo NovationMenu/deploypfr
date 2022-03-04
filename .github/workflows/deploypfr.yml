@@ -37,7 +37,7 @@ jobs:
         resource-group: M2I
     - uses: azure/k8s-deploy@v1
       with:
-        namespace: "ingress-nginx"
+        namespace: "kubetest"
         manifests: |
           ${{ github.workspace }}/manifests/storage-pg.yaml
   deploy:
