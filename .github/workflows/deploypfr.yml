@@ -39,6 +39,7 @@ jobs:
       with:
         namespace: "kubetest"
         manifests: |
+          ${{ github.workspace }}/manifests/storageclass.yaml
           ${{ github.workspace }}/manifests/storage-pg.yaml
   deploydatabase:
     runs-on: ubuntu-latest
