@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:10.1
+          image: postgres:13.5
           # command: ["/bin/sh"]
           # args: ["-c", "psql -h localhost -U root -p 5432 postgresdb", "create database testdb"]
           imagePullPolicy: "IfNotPresent"
