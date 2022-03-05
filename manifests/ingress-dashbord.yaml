@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app: admin-resto1
+  name: admin-resto1
+  namespace: kubetest
+  annotations:
+  #   kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  #   nginx.ingress.kubernetes.io/auth-response-headers: Remote-User,Remote-Name,Remote-Groups,Remote-Email
+  #   nginx.ingress.kubernetes.io/auth-signin: https://auth.novationmenu.com/
+  #   nginx.ingress.kubernetes.io/auth-url: http://authelia-service.kubetest.svc.cluster.local/api/verify
+  #   nginx.ingress.kubernetes.io/auth-snippet: |
+  #     proxy_set_header X-Forwarded-Method $request_method;
+  #   nginx.ingress.kubernetes.io/configuration-snippet: |
+  #     proxy_set_header X-Forwarded-Method $request_method;
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: admin-resto2.novationmenu.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: resto1
+                port:
+                  number: 5000
+  tls:
+  - hosts:
+    - admin-resto2.novationmenu.com
+    secretName: admin-resto2-novationmenu-com-tls
