@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: me9-eu
+  namespace: kubetest
+spec:
+  secretName: me9-eu
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: me9.eu
+  dnsNames:
+  - me9.eu

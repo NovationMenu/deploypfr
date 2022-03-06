@@ -28,7 +28,18 @@ spec:
               service:
                 name: authelia-service
                 port:
-                  number: 80                  
+                  number: 80
+    - host: me9.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: urlcontainer
+                port:
+                  number: 5000
+                  
   tls:
   - hosts:
     - resto2.novation-menu.com
@@ -36,3 +47,7 @@ spec:
   - hosts:
     - auth.novation-menu.com
     secretName: auth-novation-menu-com-tls
+  - hosts:
+    - me9.eu
+    secretName: me9.eu
+
