@@ -1,13 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: admin-resto2-novationmenu-com
+  name: admin-resto2-novation-menu-com
   namespace: kubetest
 spec:
-  secretName: admin-resto2-novationmenu-com-tls
+  secretName: admin-resto2-novation-menu-com-tls
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: admin-resto2.novationmenu.com
+  commonName: admin-resto2.novation-menu.com
   dnsNames:
-  - admin-resto2.novationmenu.com
+  - admin-resto2.novation-menu.com

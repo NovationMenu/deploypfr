@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: resto1-novation-menu-com
+  namespace: kubetest
+spec:
+  secretName: resto1-novation-menu-com-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: resto1.novation-menu.com
+  dnsNames:
+  - resto1.novation-menu.com

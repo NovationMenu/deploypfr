@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: kubetest
+  annotations:
+  #   kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: resto2.novation-menu.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: menu1
+                port:
+                  number: 5001
+    - host: auth.novation-menu.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: authelia-service
+                port:
+                  number: 80                  
+  tls:
+  - hosts:
+    - resto2.novation-menu.com
+    secretName: resto2-novation-menu-com-tls
+  - hosts:
+    - auth.novation-menu.com
+    secretName: auth-novation-menu-com-tls
